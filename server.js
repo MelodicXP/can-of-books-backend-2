@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const getBooks = require('./Modules/getBooks');
 
 const app = express();
 app.use(cors());
@@ -16,6 +17,8 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => console.log('Mongoose is connected'));
+
+app.get('/books', getBooks);
 
 app.get('/test', (request, response) => {
 
