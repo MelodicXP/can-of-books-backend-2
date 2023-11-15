@@ -53,6 +53,20 @@ Tools used were express, cors, dotenv, JavaScript, mongoose, MongoDB, nodemon.
 
 ## Change Log
 
+### 11-14-2023 - Lab 12
+
+11-14-2023 10:00am - Server now has ability to post and delete data from database
+
+Name of feature: Add ability to POST and DELETE data from database
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 8:00am
+
+Finish time: 10:00am
+
+Actual time needed to complete: 2 hours
+
 ### 11-7-2023 - Lab 11
 
 11-06-2023 9:00am - Application now has book data saved to database with image, description, status, and title
