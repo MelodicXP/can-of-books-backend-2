@@ -26,6 +26,7 @@ db.once('open', () => console.log('Mongoose is connected'));
 // Retrieve data, post data, and delete data from database
 app.get('/books', bookHandler.getBooks);
 app.post('/books', bookHandler.postBooks);
+app.put('/books/:id', bookHandler.updateBooks);
 app.delete('/books/:id', bookHandler.deleteBooks);
 
 // Test connection to server

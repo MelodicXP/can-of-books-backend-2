@@ -53,6 +53,20 @@ Tools used were express, cors, dotenv, JavaScript, mongoose, MongoDB, nodemon.
 
 ## Change Log
 
+### 11-18-2023 - Lab 13
+
+11-14-2023 8:00am - Server now has ability to PUT data to database
+
+Name of feature: Add ability to PUT data to database
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 7:30am
+
+Finish time: 8:00am
+
+Actual time needed to complete: 30 minutes
+
 ### 11-14-2023 - Lab 12
 
 11-14-2023 10:00am - Server now has ability to post and delete data from database
