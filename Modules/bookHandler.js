@@ -43,6 +43,21 @@ bookHandler.postBooks = function(request, expressResponse, next){
     });
 };
 
+// Function updateBooks - method of bookHandler
+bookHandler.updateBooks = function(request, expressResponse, next){
+  const {id} = request.params;
+  const data = request.body;
+  // new - returns updated doc instead of old doc
+  // overwrite - overwrites doc completely avoiding unwanted properties/side-effects
+  Book.findByIdAndUpdate(id, data, {new: true, overwrite: true})
+    .then(updatedBook => expressResponse.status(200).send(updatedBook))
+    .catch(err => {
+      // Log error and send a 500 Internal Server Error response
+      console.error(err);
+      expressResponse.status(500).send('Internal Server Error, updating book');
+    });
+};
+
 // Funciton deleteBooks - method of bookHandler
 bookHandler.deleteBooks = function(request, expressResponse, next){
   const {id} = request.params;
