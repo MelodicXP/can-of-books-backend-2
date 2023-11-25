@@ -8,7 +8,15 @@ const bookHandler = {};
 
 // Function getBooks - is a method of bookHandler
 bookHandler.getBooks = function(request, expressResponse, next){
-  Book.find({})
+
+  console.log(request.user.email); 
+
+  // Set property of user email
+  let queryObject = {email: request.user.email};
+  // let queryObjectTest = {email: request.user.email};
+  // console.log(queryObjectTest);
+
+  Book.find(queryObject) // Find data by user email
     .then(data => {
       if (data) {
         expressResponse.status(200).send(data);
@@ -26,6 +34,7 @@ bookHandler.getBooks = function(request, expressResponse, next){
 
 // Function postBooks - method of bookHandler
 bookHandler.postBooks = function(request, expressResponse, next){
+  
   const data = request.body; // Data sent from front-end to back-end gets received as req.body on the back-end
 
   if (!data || !data.title || !data.description) {
@@ -33,8 +42,11 @@ bookHandler.postBooks = function(request, expressResponse, next){
     return expressResponse.status(400).send('Invalid book data');
   }
 
+  let bookDataWithEmailAdded = {...data, email: request.user.email};
+  console.log(bookDataWithEmailAdded);
+
   // Create new book from data and send back confirmation if data created successfully
-  Book.create(data)
+  Book.create(bookDataWithEmailAdded)
     .then(createdBook => expressResponse.status(201).send(createdBook))
     .catch(err => {
       // Log error and send a 500 Internal Server Error response
