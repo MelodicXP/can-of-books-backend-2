@@ -12,6 +12,7 @@ const bookSchema = new Schema({
     enum: ['Want to Read', 'In Progress', 'Completed'], // Define the allowed string values
   },
   imageUrl: String,
+  email: String,
 });
 
 module.exports = bookSchema;
