@@ -53,6 +53,34 @@ Tools used were express, cors, dotenv, JavaScript, mongoose, MongoDB, nodemon.
 
 ## Change Log
 
+### 11-26-2023 301 - Lab 15
+
+11-26-2023 8:00am - Add Auth0
+
+Name of feature: Add Auth0 to application
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 10:30 am
+
+Finish time: 12:00 pm
+
+Actual time needed to complete: 5 hours
+
+### 11-25-2023 301 - Lab 15
+
+11-25-2023 8:00am - Add Auth0
+
+Name of feature: Add Auth0 to application
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 10:00 am
+
+Finish time: 1:00 pm
+
+Actual time needed to complete:
+
 ### 11-18-2023 - Lab 13
 
 11-14-2023 8:00am - Server now has ability to PUT data to database

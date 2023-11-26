@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bookHandler = require('./Modules/bookHandler');
+const verifyUser = require('./Modules/authorize');
 
 const app = express();
 app.use(cors());
@@ -23,17 +24,20 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', () => console.log('Mongoose is connected'));
 
-// Retrieve data, post data, and delete data from database
-app.get('/books', bookHandler.getBooks);
-app.post('/books', bookHandler.postBooks);
-app.put('/books/:id', bookHandler.updateBooks);
-app.delete('/books/:id', bookHandler.deleteBooks);
-
 // Test connection to server
 app.get('/test', (request, response) => {
 
   response.send('test request received');
 
 });
+
+// Verify user is authenticated before sending back any data
+app.use(verifyUser);
+
+// Retrieve data, post data, and delete data from database
+app.get('/books', bookHandler.getBooks);
+app.post('/books', bookHandler.postBooks);
+app.put('/books/:id', bookHandler.updateBooks);
+app.delete('/books/:id', bookHandler.deleteBooks);
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
