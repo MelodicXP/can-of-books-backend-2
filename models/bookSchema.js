@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// Create book schema
 const bookSchema = new Schema({
   title: String,
   description: String,
@@ -15,4 +16,8 @@ const bookSchema = new Schema({
   email: String,
 });
 
-module.exports = bookSchema;
+// Create book model based on schema
+const Book = mongoose.model('Book', bookSchema);
+
+// Export book model
+module.exports = Book;

@@ -1,7 +1,7 @@
 'use strict';
 
 // const { response } = require('express');
-const Book = require('../Model/bookModel');
+const Book = require('../models/bookSchema');
 
 // Create empty object as this file will export functions as objects now
 const bookHandler = {};
