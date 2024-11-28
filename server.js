@@ -5,19 +5,33 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 
-// Todo - for now try to get from environment
-mongoose.connect('mongodb://127.0.0.1:27017/books');
-
 const PORT = process.env.PORT || 3002;
 
 const app = express();
 app.use(cors()); // Middleware
 
+// Connect to MongoDB with Mongoose using async/await
+async function connectToDatabase() {
+  try {
+    // Connect to the MongoDB instance at the specified URL
+    await mongoose.connect('mongodb://127.0.0.1:27017/books');
+    console.log('Successfully connected to MongoDB');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+}
+
+// Call the main function to connect to MongoDB
+connectToDatabase();
+
+// Define a simple route to test server
 app.get('/', async (request, response) => {
   response.send('Welcome to home page!');
 });
 
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+// Start the server
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
 
 // // Required to allow req body to show content (allows server to handle incoming JSON data from client)
 // app.use(express.json());
