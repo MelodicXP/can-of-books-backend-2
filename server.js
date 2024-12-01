@@ -20,14 +20,14 @@ app.get('/books', async (request, response) => {
   
   const filterQuery = {};
   
-  // if (request.query.location) {
-    //   filterQuery.location = request.query.location;
-    // }
+  if (request.query.book) {
+    filterQuery.book = request.query.book;
+  }
     
-    const books = await Book.find({});
+  const books = await Book.find(filterQuery);
     
-    response.json(books);
-  });
+  response.json(books);
+});
   
 // ** Function Declarations **
 async function connectToDatabase() {
