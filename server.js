@@ -1,36 +1,51 @@
 'use strict';
 
 require('dotenv').config();
+const DATABASE = process.env.MONGODB_CONN;
+const PORT = process.env.PORT || 3002;
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-
-const PORT = process.env.PORT || 3002;
+const Book = require('./models/book');
 
 const app = express();
-app.use(cors()); // Middleware
+app.use(cors());
 
-// Connect to MongoDB with Mongoose using async/await
+// ** Connect to the Database **
 async function connectToDatabase() {
   try {
     // Connect to the MongoDB instance at the specified URL
-    await mongoose.connect('mongodb://127.0.0.1:27017/books');
+    await mongoose.connect(DATABASE);
     console.log('Successfully connected to MongoDB');
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
   }
 }
-
-// Call the main function to connect to MongoDB
 connectToDatabase();
 
-// Define a simple route to test server
+// ** Routes **
 app.get('/', async (request, response) => {
   response.send('Welcome to home page!');
 });
 
-// Start the server
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.get('/books', async (request, response) => {
+
+  const filterQuery = {};
+
+  // if (request.query.location) {
+  //   filterQuery.location = request.query.location;
+  // }
+
+  const books = await Book.find({});
+
+  response.json(books);
+});
+
+// Start Server
+function startServer() {
+  app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+};
+startServer();
 
 
 // // Required to allow req body to show content (allows server to handle incoming JSON data from client)
