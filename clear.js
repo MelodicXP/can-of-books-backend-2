@@ -1,19 +1,33 @@
-const mongoose = require('mongoose');
+'use strict';
+
 require('dotenv').config();
+const mongoose = require('mongoose');
+const Book = require('./models/book');
 
-mongoose.connect(process.env.MONGODB_CONN);
+const DATABASE = process.env.MONGODB_CONN;
 
-let Book = require('./Model/bookModel');
+// ** Function Declarations **
+async function clearDatabase () {
+  await connectToDatabase(); // wait for db connection prior to proceeding
 
-async function clear () {
   try {
     await Book.deleteMany({});
     console.log('Books cleared');
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   } finally {
-    mongoose.disconnect();
+    mongoose.disconnect().then(() => console.log('Disconnected from database'));
   }
 }
 
-clear();
+async function connectToDatabase() {
+  try {
+    await mongoose.connect(DATABASE);
+    console.log('Connected to database, ready to clear database');
+  } catch (error) {
+    console.error('Error connecting to database, cannot clear database: ', error);
+  }
+}
+
+// ** Executable Code (Entry Point) **
+clearDatabase();

@@ -4,17 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Book = require('./models/book');
 
-// ** Connect to the Database **
 const DATABASE = process.env.MONGODB_CONN;
-
-async function connectToDatabase() {
-  try {
-    await mongoose.connect(DATABASE);
-    console.log('Connected to database, ready to seed');
-  } catch (error) {
-    console.error('Error connecting to database, cannot seed: ', error);
-  }
-}
 
 // ** Function Declarations **
 async function seedDatabase() {
@@ -51,6 +41,15 @@ async function seedDatabase() {
   } finally {
     // Always close connection, whether or not there is error
     mongoose.disconnect().then(() => console.log('Disconnected from database'));
+  }
+}
+
+async function connectToDatabase() {
+  try {
+    await mongoose.connect(DATABASE);
+    console.log('Connected to database, ready to seed');
+  } catch (error) {
+    console.error('Error connecting to database, cannot seed: ', error);
   }
 }
 

@@ -11,7 +11,25 @@ const Book = require('./models/book');
 const app = express();
 app.use(cors());
 
-// ** Connect to the Database **
+// ** Routes **
+app.get('/', async (request, response) => {
+  response.send('Welcome to home page!');
+});
+
+app.get('/books', async (request, response) => {
+  
+  const filterQuery = {};
+  
+  // if (request.query.location) {
+    //   filterQuery.location = request.query.location;
+    // }
+    
+    const books = await Book.find({});
+    
+    response.json(books);
+  });
+  
+// ** Function Declarations **
 async function connectToDatabase() {
   try {
     // Connect to the MongoDB instance at the specified URL
@@ -21,30 +39,13 @@ async function connectToDatabase() {
     console.error('Error connecting to MongoDB:', error);
   }
 }
-connectToDatabase();
 
-// ** Routes **
-app.get('/', async (request, response) => {
-  response.send('Welcome to home page!');
-});
-
-app.get('/books', async (request, response) => {
-
-  const filterQuery = {};
-
-  // if (request.query.location) {
-  //   filterQuery.location = request.query.location;
-  // }
-
-  const books = await Book.find({});
-
-  response.json(books);
-});
-
-// Start Server
 function startServer() {
   app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 };
+
+// ** Executable Code (Entry Point) **
+connectToDatabase();
 startServer();
 
 
