@@ -7,9 +7,11 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const Book = require('./models/book');
+const {getBooks, createBooks, deleteBooks} = require('./routes/handlers');
 
 const app = express();
 app.use(cors());
+app.use(express.json()); // allows POST request body to be properly parsed
 
 
 // ** Function Declarations **
@@ -21,7 +23,7 @@ async function connectToDatabase() {
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
   }
-}
+};
 
 function startServer() {
   app.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -32,18 +34,11 @@ app.get('/', async (request, response) => {
   response.send('Welcome to home page!');
 });
 
-app.get('/books', async (request, response) => {
-  
-  const filterQuery = {};
-  
-  if (request.query.book) {
-    filterQuery.book = request.query.book;
-  }
-    
-  const books = await Book.find(filterQuery);
-    
-  response.json(books);
-});
+app.get('/books', getBooks);
+
+// Todo - convert to single functions pulled from handlers file
+// todo - app.post('/books', createBook)
+// todo - app.delete('/books', deleteBook)
   
 // ** Executable Code (Entry Point) **
 connectToDatabase();
