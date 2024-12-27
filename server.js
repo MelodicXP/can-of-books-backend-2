@@ -36,7 +36,7 @@ app.get('/', async (request, response) => {
 
 app.get('/books', getBooks);
 app.post('/books', createBook);
-app.delete('/books', deleteBook);
+app.delete('/books/:id', deleteBook);
   
 // ** Executable Code (Entry Point) **
 connectToDatabase();
