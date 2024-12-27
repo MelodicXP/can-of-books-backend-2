@@ -15,7 +15,13 @@ async function getBooks(request, response) {
 };
 
 async function createBook(request, response) {
-  response.send('Create book placeholder');
+  try {
+    const newBook = await Book.create(request.body); // request body same shape as book data
+    response.json(newBook);
+  } catch (error) {
+    console.error(error);
+    response.status(500).send('Error creating book');
+  }
 };
 
 async function deleteBook(request, response) {
