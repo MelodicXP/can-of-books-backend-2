@@ -7,7 +7,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const Book = require('./models/book');
-const {getBooks, createBooks, deleteBooks} = require('./routes/handlers');
+const {getBooks, createBook, deleteBook} = require('./routes/handlers');
 
 const app = express();
 app.use(cors());
@@ -35,10 +35,8 @@ app.get('/', async (request, response) => {
 });
 
 app.get('/books', getBooks);
-
-// Todo - convert to single functions pulled from handlers file
-// todo - app.post('/books', createBook)
-// todo - app.delete('/books', deleteBook)
+app.post('/books', createBook);
+app.delete('/books', deleteBook);
   
 // ** Executable Code (Entry Point) **
 connectToDatabase();

@@ -14,4 +14,12 @@ async function getBooks(request, response) {
   response.json(books);
 };
 
-module.exports = { getBooks };
+async function createBook(request, response) {
+  response.send('Create book placeholder');
+};
+
+async function deleteBook(request, response) {
+  response.send('Delete Book placeholder');
+};
+
+module.exports = { getBooks, createBook, deleteBook };
